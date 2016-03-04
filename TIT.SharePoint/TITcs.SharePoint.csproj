@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{912FF57A-0E32-416A-85DE-0667ADA99175}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TITcs.SharePoint</RootNamespace>
+    <AssemblyName>TITcs.SharePoint</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Server">
+      <HintPath>..\packages\Microsoft.SharePoint.Library\Microsoft.Office.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Server.Search">
+      <HintPath>..\packages\Microsoft.SharePoint.Library\Microsoft.Office.Server.Search.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Server.UserProfiles">
+      <HintPath>..\packages\Microsoft.SharePoint.Library\Microsoft.Office.Server.UserProfiles.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint">
+      <HintPath>..\packages\Microsoft.SharePoint.Library\Microsoft.SharePoint.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.Client.UserProfiles, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.IdentityModel">
+      <HintPath>..\packages\Microsoft.SharePoint.Library\Microsoft.SharePoint.IdentityModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Library">
+      <HintPath>..\packages\Microsoft.SharePoint.Library\Microsoft.SharePoint.Library.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Portal">
+      <HintPath>..\packages\Microsoft.SharePoint.Library\Microsoft.SharePoint.Portal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Publishing">
+      <HintPath>..\packages\Microsoft.SharePoint.Library\Microsoft.SharePoint.Publishing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Security, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.SharePoint.Library\Microsoft.SharePoint.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\ConvertExtensions.cs" />
+    <Compile Include="Log\ILog.cs" />
+    <Compile Include="Log\Logger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query\CamlExpressionVisitor.cs" />
+    <Compile Include="Query\ClientObjectExtensions.cs" />
+    <Compile Include="Query\ClientQuery.cs" />
+    <Compile Include="Query\ContextFactory.cs" />
+    <Compile Include="Query\ContextType.cs" />
+    <Compile Include="Query\CtpBase.cs" />
+    <Compile Include="Query\ExpressionVisitor.cs" />
+    <Compile Include="Query\Extensions\IQueryExtensions.cs" />
+    <Compile Include="Query\File.cs" />
+    <Compile Include="Query\ImageUploaded.cs" />
+    <Compile Include="Query\IQuery.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\AdditionalFromClause.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\CloneContext.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\Expressions\ExtensionExpression.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\Expressions\IPartialEvaluationExceptionExpressionVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\Expressions\IVBSpecificExpressionVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\Expressions\PartialEvaluationExceptionExpression.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\Expressions\QuerySourceReferenceExpression.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\Expressions\SubQueryExpression.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\Expressions\VBStringComparisonExpression.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ExpressionTreeVisitors\AccessorFindingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ExpressionTreeVisitors\CloningExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ExpressionTreeVisitors\FormattingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ExpressionTreeVisitors\ReferenceReplacingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ExpressionTreeVisitors\ReverseResolvingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\FromClauseBase.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\GroupJoinClause.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\IBodyClause.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\IClause.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\IQuerySource.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\JoinClause.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\MainFromClause.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\OrderByClause.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\Ordering.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\OrderingDirection.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\QuerySourceMapping.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperatorBase.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\AggregateFromSeedResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\AggregateResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\AllResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\AnyResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\AverageResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\CastResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\ChoiceResultOperatorBase.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\ContainsResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\CountResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\DefaultIfEmptyResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\DistinctResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\ExceptResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\FirstResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\GroupResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\IntersectResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\LastResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\LongCountResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\MaxResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\MinResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\OfTypeResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\ReverseResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\SequenceFromSequenceResultOperatorBase.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\SequenceTypePreservingResultOperatorBase.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\SingleResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\SkipResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\SumResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\TakeResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\UnionResultOperator.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\ResultOperators\ValueFromSequenceResultOperatorBase.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\SelectClause.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\StreamedData\IStreamedData.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\StreamedData\IStreamedDataInfo.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\StreamedData\StreamedScalarValueInfo.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\StreamedData\StreamedSequence.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\StreamedData\StreamedSequenceInfo.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\StreamedData\StreamedSingleValueInfo.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\StreamedData\StreamedValue.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\StreamedData\StreamedValueInfo.cs" />
+    <Compile Include="Query\LinqProvider\Clauses\WhereClause.cs" />
+    <Compile Include="Query\LinqProvider\Collections\ChangeResistantObservableCollectionEnumerator.cs" />
+    <Compile Include="Query\LinqProvider\Collections\IndexValuePair.cs" />
+    <Compile Include="Query\LinqProvider\Collections\MultiDictionaryExtensions.cs" />
+    <Compile Include="Query\LinqProvider\Collections\ObservableCollectionChangedEventArgs.cs" />
+    <Compile Include="Query\LinqProvider\Collections\ObservableCollectionExtensions.cs" />
+    <Compile Include="Query\LinqProvider\DefaultQueryProvider.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\FetchFilteringQueryModelVisitor.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\FetchManyRequest.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\FetchOneRequest.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\FetchQueryModelBuilder.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\FetchRequestBase.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\FetchRequestCollection.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\FluentFetchRequest.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\Parsing\FetchExpressionNodeBase.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\Parsing\FetchManyExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\Parsing\FetchOneExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\Parsing\OuterFetchExpressionNodeBase.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\Parsing\ThenFetchExpressionNodeBase.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\Parsing\ThenFetchManyExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\EagerFetching\Parsing\ThenFetchOneExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\IQueryExecutor.cs" />
+    <Compile Include="Query\LinqProvider\IQueryModelVisitor.cs" />
+    <Compile Include="Query\LinqProvider\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="Query\LinqProvider\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="Query\LinqProvider\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\MemberBindings\FieldInfoBinding.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\MemberBindings\MemberBinding.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\MemberBindings\MethodInfoBinding.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\MemberBindings\PropertyInfoBinding.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\MultiReplacingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\PartialEvaluatingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\ReplacingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\SubQueryFindingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\ExpressionTransformation.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\ExpressionTransformerRegistry.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\IExpressionTranformationProvider.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\IExpressionTransformer.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\PredefinedTransformations\AttributeEvaluatingExpressionTransformer.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\PredefinedTransformations\DictionaryEntryNewExpressionTransformer.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\PredefinedTransformations\InvocationOfLambdaExpressionTransformer.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\PredefinedTransformations\KeyValuePairNewExpressionTransformer.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\PredefinedTransformations\MemberAddingNewExpressionTransformerBase.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\PredefinedTransformations\MethodCallExpressionTransformerAttribute.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\PredefinedTransformations\NullableValueTransformer.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\PredefinedTransformations\TupleNewExpressionTransformer.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\PredefinedTransformations\VBCompareStringExpressionTransformer.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\Transformation\PredefinedTransformations\VBInformationIsNothingExpressionTransformer.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\TransformingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\TransparentIdentifierRemovingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\TreeEvaluation\EvaluatableTreeFindingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ExpressionTreeVisitors\TreeEvaluation\PartialEvaluationInfo.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ParserException.Obsolete.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\ExpressionTreeParser.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\ExpressionTreeProcessors\CompoundExpressionTreeProcessor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\ExpressionTreeProcessors\NullExpressionTreeProcessor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\ExpressionTreeProcessors\PartialEvaluatingExpressionTreeProcessor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\ExpressionTreeProcessors\TransformingExpressionTreeProcessor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IExpressionTreeProcessor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\INodeTypeProvider.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\AggregateExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\AggregateFromSeedExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\AllExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\AnyExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\AverageExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\CastExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\ClauseGenerationContext.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\ContainsExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\CountExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\DefaultIfEmptyExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\DistinctExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\ExceptExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\ExpressionNodeInstantiationException.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\ExpressionResolver.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\FirstExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\GroupByExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\GroupByWithResultSelectorExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\GroupJoinExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\IExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\IExpressionNodeParseInfo.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\IntersectExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\IQuerySourceExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\JoinExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\LastExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\LongCountExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\MainSourceExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\MaxExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\MethodCallExpressionNodeBase.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\MethodCallExpressionNodeFactory.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\MinExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\OfTypeExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\OrderByDescendingExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\OrderByExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\QuerySourceExpressionNodeUtility.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\ResolvedExpressionCache.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\ResultOperatorExpressionNodeBase.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\ReverseExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\SelectExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\SelectManyExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\SingleExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\SkipExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\SumExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\TakeExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\ThenByDescendingExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\ThenByExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\UnionExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IntermediateModel\WhereExpressionNode.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\IQueryParser.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\MethodCallExpressionParser.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\NodeTypeProviders\CompoundNodeTypeProvider.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\NodeTypeProviders\MethodInfoBasedNodeTypeRegistry.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\NodeTypeProviders\MethodNameBasedNodeTypeRegistry.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\NodeTypeProviders\NameBasedRegistrationInfo.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\Structure\QueryParser.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\ThrowingExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqProvider\Parsing\TupleExpressionBuilder.cs" />
+    <Compile Include="Query\LinqProvider\QueryableBase.cs" />
+    <Compile Include="Query\LinqProvider\QueryModel.cs" />
+    <Compile Include="Query\LinqProvider\QueryModelBuilder.cs" />
+    <Compile Include="Query\LinqProvider\QueryModelVisitorBase.cs" />
+    <Compile Include="Query\LinqProvider\QueryProviderBase.cs" />
+    <Compile Include="Query\LinqProvider\Transformations\SubQueryFromClauseFlattener.cs" />
+    <Compile Include="Query\LinqProvider\UniqueIdentifierGenerator.cs" />
+    <Compile Include="Query\LinqProvider\Utilities\ReflectionUtility.cs" />
+    <Compile Include="Query\LinqToCaml\CamlCommandData.cs" />
+    <Compile Include="Query\LinqToCaml\CamlElement.cs" />
+    <Compile Include="Query\LinqToCaml\CamlLogical.cs" />
+    <Compile Include="Query\LinqToCaml\CamlOperators.cs" />
+    <Compile Include="Query\LinqToCaml\CamlQueryable.cs" />
+    <Compile Include="Query\LinqToCaml\CamlQueryableExecutor.cs" />
+    <Compile Include="Query\LinqToCaml\CamlQueryExpressionTreeVisitor.cs" />
+    <Compile Include="Query\LinqToCaml\CamlQueryModelVisitorBase.cs" />
+    <Compile Include="Query\LinqToCaml\QueryPartsAggregator.cs" />
+    <Compile Include="Query\ListItemData.cs" />
+    <Compile Include="Query\ListQuery.cs" />
+    <Compile Include="Query\ContentAttribute.cs" />
+    <Compile Include="Query\PredicateBuilder.cs" />
+    <Compile Include="Query\PublishedImage.cs" />
+    <Compile Include="Query\QueryBase.cs" />
+    <Compile Include="Query\QueryCache.cs" />
+    <Compile Include="Query\QueryCommand.cs" />
+    <Compile Include="Query\ServerQuery.cs" />
+    <Compile Include="Query\SharedSource\ReSharperAnnotations\AssertionConditionAttribute.cs" />
+    <Compile Include="Query\SharedSource\ReSharperAnnotations\AssertionConditionType.cs" />
+    <Compile Include="Query\SharedSource\ReSharperAnnotations\AssertionMethodAttribute.cs" />
+    <Compile Include="Query\SharedSource\ReSharperAnnotations\InvokerParameterNameAttribute.cs" />
+    <Compile Include="Query\SharedSource\ReSharperAnnotations\NoEnumerationAttribute.cs" />
+    <Compile Include="Query\SharedSource\Utilities\ArgumentUtility.cs" />
+    <Compile Include="Query\SharedSource\Utilities\Assertion.cs" />
+    <Compile Include="Query\SharedSource\Utilities\NullableTypeUtility.cs" />
+    <Compile Include="Query\UIException.cs" />
+    <Compile Include="Query\Url.cs" />
+    <Compile Include="Query\User.cs" />
+    <Compile Include="Query\UserGroup.cs" />
+    <Compile Include="Query\UserProfile.cs" />
+    <Compile Include="Services\FilterType.cs" />
+    <Compile Include="Services\HandlerFactory.cs" />
+    <Compile Include="Services\ModelObject.cs" />
+    <Compile Include="Services\RouteAttribute.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\ServiceContext.cs" />
+    <Compile Include="Services\ServiceLogicBase.cs" />
+    <Compile Include="Services\SharePointServiceSection.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="UI\FeatureStaplerAttribute.cs" />
+    <Compile Include="UI\IInternalUILogic.cs" />
+    <Compile Include="UI\IUILogic.cs" />
+    <Compile Include="UI\UIFactory.cs" />
+    <Compile Include="UI\UILogic.cs" />
+    <Compile Include="UI\UILogicContext.cs" />
+    <Compile Include="UI\UILogicEventHandler.cs" />
+    <Compile Include="UI\UISharePointContext.cs" />
+    <Compile Include="UI\UISharePointControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\UISharePointControlEditors.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\UISharePointControlEditor.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\UISharePointEventHandler.cs" />
+    <Compile Include="UI\UIWebPart.cs" />
+    <Compile Include="UI\WebParts\DropDownListEditorPart.cs" />
+    <Compile Include="UI\WebParts\EditorPartEventArgs.cs" />
+    <Compile Include="UI\WebParts\EditorPartEventHandler.cs" />
+    <Compile Include="UI\WebParts\IEditorPart.cs" />
+    <Compile Include="UI\WebParts\IUIWebPartGroups.cs" />
+    <Compile Include="UI\WebParts\IUIWebPartGroup.cs" />
+    <Compile Include="UI\WebParts\LinkButtonEditorPart.cs" />
+    <Compile Include="UI\WebParts\TextBoxEditorPart,.cs" />
+    <Compile Include="UI\WebParts\UIWebPartGroups.cs" />
+    <Compile Include="UI\WebParts\UIWebPartGroup.cs" />
+    <Compile Include="Utils\FeatureUtils.cs" />
+    <Compile Include="Utils\ContentUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="key.snk" />
+    <None Include="Query\LinqProvider\Doc\include\GettingStartedWithRelinq.aml" />
+    <None Include="Query\LinqProvider\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Query\LinqProvider\Doc\include\Remotion.Linq.NamespaceDoc.xml" />
+    <Content Include="Query\LinqProvider\obj\Debug\Linq.Core.csproj.FileListAbsolute.txt" />
+    <Content Include="Query\LinqProvider\obj\Debug\Remotion.Linq.dll" />
+    <Content Include="Query\LinqProvider\obj\Debug\Remotion.Linq.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Query\LinqProvider\obj\Debug\TempPE\" />
+    <Folder Include="Query\LinqProvider\SharedSource\ResharperAnnotations\" />
+    <Folder Include="Query\LinqProvider\SharedSource\Utilities\" />
+    <Folder Include="UI\Extensions\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
