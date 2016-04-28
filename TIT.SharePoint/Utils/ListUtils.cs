@@ -1,4 +1,6 @@
-﻿using Microsoft.SharePoint;
+﻿using System;
+using System.Web.SessionState;
+using Microsoft.SharePoint;
 
 namespace TITcs.SharePoint.Utils
 {
@@ -19,21 +21,15 @@ namespace TITcs.SharePoint.Utils
                     SPBasePermissions.Open | SPBasePermissions.UseClientIntegration |
                     SPBasePermissions.ViewFormPages | SPBasePermissions.ViewListItems)
         {
-            var list = web.Lists.TryGetList(listTitle);
-
-            if (list != null)
+            runCodeInListInstance(web, listTitle, (list) =>
             {
-                var allowSafeUpdates = web.AllowUnsafeUpdates;
-                web.AllowUnsafeUpdates = true;
-
                 list.BreakRoleInheritance(true, false);
                 list.AllowEveryoneViewItems = true;
                 list.AnonymousPermMask64 = basePermissions;
 
                 list.Update();
-
-                web.AllowUnsafeUpdates = allowSafeUpdates;
-            }
+            });
+            
         }
 
         /// <summary>
@@ -43,6 +39,34 @@ namespace TITcs.SharePoint.Utils
         /// <param name="listTitle">List title</param>
         public static void DisableAccessAnonymous(SPWeb web, string listTitle)
         {
+            runCodeInListInstance(web, listTitle, (list) =>
+            {
+                list.ResetRoleInheritance();
+                list.Update();
+            });
+
+        }
+
+        public static void AllowDuplicateValues(SPWeb web, string listTitle, string fieldName)
+        {
+            runCodeInListInstance(web, listTitle, (list) =>
+            {
+                if (list.Fields.ContainsField(fieldName))
+                {
+                    SPField field = list.Fields[fieldName];
+
+                    field.Indexed = true;
+                    //field.AllowDuplicateValues = false;
+                    field.EnforceUniqueValues = true;
+
+                    field.Update();
+                    list.Update();
+                }
+            });
+        }
+
+        private static void runCodeInListInstance(SPWeb web, string listTitle, Action<SPList> action)
+        {
             var list = web.Lists.TryGetList(listTitle);
 
             if (list != null)
@@ -50,8 +74,7 @@ namespace TITcs.SharePoint.Utils
                 var allowSafeUpdates = web.AllowUnsafeUpdates;
                 web.AllowUnsafeUpdates = true;
 
-                list.ResetRoleInheritance();
-                list.Update();
+                action(list);
 
                 web.AllowUnsafeUpdates = allowSafeUpdates;
             }
