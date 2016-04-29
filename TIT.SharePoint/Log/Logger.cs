@@ -48,6 +48,11 @@ namespace TITcs.SharePoint.Log
             WriteLog(LoggerCategory.Unexpected, source, errorMessage);
         }
 
+        public static void Unexpected(string source, string errorMessage, params object[] parameters)
+        {
+            WriteLog(LoggerCategory.Unexpected, source, string.Format(errorMessage, parameters));
+        }
+
         public static void Unexpected(string source, Exception exception)
         {
             Unexpected(source, exception.Message);
