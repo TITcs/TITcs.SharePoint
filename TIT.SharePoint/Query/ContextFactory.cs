@@ -5,6 +5,7 @@ using Microsoft.SharePoint.Client;
 using System;
 using System.Net;
 using TITcs.SharePoint.Log;
+using TITcs.SharePoint.Utils;
 
 namespace TITcs.SharePoint.Query
 {
@@ -54,12 +55,12 @@ namespace TITcs.SharePoint.Query
                 rootUrl = string.Format("{0}://{1}", request.Url.Scheme, request.Url.Authority);
 
 #if DEBUG
-                rootUrl = WebConfigurationManager.AppSettings["SharePoint:Root"];
+                rootUrl = AppSettingsUtils.Root;
 #endif
             }
             else
             {
-                rootUrl = WebConfigurationManager.AppSettings["SharePoint:Root"];
+                rootUrl = AppSettingsUtils.Root;
             }
 
             Logger.Information("ContextFactory.GetContext", string.Format("Url: {0}", rootUrl));
@@ -74,7 +75,7 @@ namespace TITcs.SharePoint.Query
             return GetContext();
 
 #else
-            var rootUrl = WebConfigurationManager.AppSettings["SharePoint:Root"];
+            var rootUrl = AppSettingsUtils.Root;
             var urlSite = (_isClient)
                 ? rootUrl
                     : (SPContext.Current != null) 
@@ -90,7 +91,7 @@ namespace TITcs.SharePoint.Query
             return GetContext();
 
 #else
-            var rootUrl = WebConfigurationManager.AppSettings["SharePoint:Root"];//WebConfigurationManager.AppSettings["SharePoint:Root"];
+            var rootUrl = AppSettingsUtils.Root;;
             var urlSite = (_isClient) ? rootUrl : (SPContext.Current!=null)?SPContext.Current.Web.Url:
             rootUrl;
             return GetContext(urlSite);
@@ -111,9 +112,9 @@ namespace TITcs.SharePoint.Query
                     };
 
 #if DEBUG
-                    var userName = WebConfigurationManager.AppSettings["SharePoint:UserName"];
-                    var passWord = WebConfigurationManager.AppSettings["SharePoint:PassWord"];
-                    var netDomain = WebConfigurationManager.AppSettings["SharePoint:NetDomain"];
+                    var userName = AppSettingsUtils.UserName;
+                    var passWord = AppSettingsUtils.Password;
+                    var netDomain = AppSettingsUtils.NetDomain;
 
                     context.Credentials = new NetworkCredential(userName, passWord, netDomain);
 #endif

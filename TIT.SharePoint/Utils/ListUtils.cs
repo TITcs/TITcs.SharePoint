@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.Client;
 using TITcs.SharePoint.Log;
+using DraftVisibilityType = Microsoft.SharePoint.DraftVisibilityType;
 
 namespace TITcs.SharePoint.Utils
 {
@@ -150,6 +154,27 @@ namespace TITcs.SharePoint.Utils
 
                 web.AllowUnsafeUpdates = allowSafeUpdates;
             }
+            else
+                Logger.Unexpected("ListUtils.runCodeInListInstance", "The list \"{0}\" does not exist", listTitle);
+        }
+
+        private static void runCodeInListInstance(ClientContext clientContext, string listTitle, Action<List> action)
+        {
+            Web web = clientContext.Web;
+            ListCollection lists = web.Lists;
+
+            IEnumerable<List> existingLists = clientContext.LoadQuery(lists.Where(list => list.Title == listTitle));
+
+            clientContext.ExecuteQuery();
+
+            var existingList = existingLists.FirstOrDefault();
+
+            if (existingList != null)
+            {
+                action(existingList);
+            }
+            else
+                Logger.Unexpected("ListUtils.runCodeInListInstance", "The list \"{0}\" does not exist", listTitle);
         }
 
         public static void AddField(SPWeb web, string listTitle, string internalNameOfField, string displayNameOfField, bool isViewField, bool showEditCreateForm, bool showDisplayForm)

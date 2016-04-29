@@ -364,6 +364,12 @@
     <Compile Include="Query\User.cs" />
     <Compile Include="Query\UserGroup.cs" />
     <Compile Include="Query\UserProfile.cs" />
+    <Compile Include="Repository\Cache.cs" />
+    <Compile Include="Repository\IListQuery.cs" />
+    <Compile Include="Repository\Lists.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="Repository\RepositorySite.cs" />
+    <Compile Include="Repository\RepositoryWeb.cs" />
     <Compile Include="Services\FilterType.cs" />
     <Compile Include="Services\HandlerFactory.cs" />
     <Compile Include="Services\ModelObject.cs" />
@@ -391,6 +397,7 @@
     <Compile Include="UI\WebParts\LinkButtonEditorPart.cs" />
     <Compile Include="UI\WebParts\TextBoxEditorPart,.cs" />
     <Compile Include="UI\WebParts\UIWebPartGroup.cs" />
+    <Compile Include="Utils\AppSettingsUtils.cs" />
     <Compile Include="Utils\EventReceiverUtils.cs" />
     <Compile Include="Utils\FeatureUtils.cs" />
     <Compile Include="Utils\ContentUtils.cs" />

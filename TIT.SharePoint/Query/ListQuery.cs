@@ -1,10 +1,11 @@
-﻿
+﻿using TITcs.SharePoint.Repository;
+
 namespace TITcs.SharePoint.Query
 {
-    public class ListQuery
+    public class ListQuery : IListQuery
     {
-        public string Title;
-        public string Url;
+        public string Title { get; }
+        public string Url { get; }
 
         public ListQuery(string title, string url)
         {
