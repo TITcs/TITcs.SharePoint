@@ -6,7 +6,7 @@ after_build:
   - ps: >-
       . .\build.ps1 Pack-Nuget
 artifacts:
-  - path: nuget\titcs.sharepoint
+  - path: src\nuget\titcs.sharepoint
     name: src
 
 deploy:
