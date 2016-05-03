@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>TITcs.SharePoint</id>
+        <title>TITcs.SharePoint</title>
+        <version>$version$</version>
+        <authors>Stiven</authors>
+        <owners>TITcs</owners>
+        <licenseUrl>https://github.com/TITcs/TITcs.SharePoint/blob/master/LICENCE</licenseUrl>
+        <projectUrl>https://github.com/TITcs/TITcs.SharePoint/</projectUrl>
+        <iconUrl></iconUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>TITcs.SharePoint is a library that aims to help developers beginning in the SharePoint development.</description>
+        <tags>titcs sharepoint development client context server</tags>
+    </metadata>
+    <files>
+        <file src="..\..\TITcs.SharePoint\bin\Release\TITcs.SharePoint.dll" target="lib\TITcs.SharePoint.dll" />
+    </files>
+    <dependencies>
+            <dependency id="Newtonsoft.Json" version="6.0.5" />
+    </dependencies>
+</package>
