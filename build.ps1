@@ -1,10 +1,10 @@
  $rootDir = $env:APPVEYOR_BUILD_FOLDER
  $buildNumber = $env:APPVEYOR_BUILD_NUMBER
  $solutionFile = "$rootDir\TITcs.SharePoint.Net.sln"
- $srcDir = "$rootDir\nuget\TITcs.SharePoint"
+ $srcDir = "$rootDir\NuGet\TITcs.SharePoint"
  $slns = ls "$rootDir\*.sln"
  $packagesDir = "$rootDir\packages"
- $nuspecPath = "$rootDir\nuget\TITcs.SharePoint\TITcs.SharePoint.nuspec"
+ $nuspecPath = "$rootDir\NuGet\TITcs.SharePoint\TITcs.SharePoint.nuspec"
  $nugetExe = "$packagesDir\NuGet.CommandLine.2.8.5\tools\NuGet.exe"
  $nupkgPath = "$rootDir\NuGet\TITcs.SharePoint\TITcs.SharePoint.{0}.nupkg"
 
