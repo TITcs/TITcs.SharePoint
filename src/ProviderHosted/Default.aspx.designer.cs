@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceQueryDemo
+namespace ProviderHosted
 {
 
 

@@ -1,0 +1,5 @@
+﻿TITcs.Utils = (function() {
+
+    return {};
+
+})();

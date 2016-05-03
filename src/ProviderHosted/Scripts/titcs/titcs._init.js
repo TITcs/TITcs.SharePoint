@@ -1,0 +1,4 @@
+﻿var TITcs = {
+    Http: {},
+    Utils: {}
+};

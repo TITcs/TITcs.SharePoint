@@ -1,0 +1,10 @@
+[
+  {
+    "outputFileName": "Scripts/titcs/titcs.js",
+    "inputFiles": [
+      "Scripts/titcs/titcs._init.js",
+      "Scripts/titcs/titcs.http.js",
+      "Scripts/titcs/titcs.utils.js"
+    ]
+  }
+]

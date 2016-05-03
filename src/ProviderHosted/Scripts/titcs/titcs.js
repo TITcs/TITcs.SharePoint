@@ -1,4 +1,8 @@
-﻿var services = (function () {
+var TITcs = {
+    Http: {},
+    Utils: {}
+};
+TITcs.Http = (function () {
 
     var get = function (url, data, cache) {
 
@@ -54,13 +58,13 @@
             cache: options.cache,
             statusCode: {
                 401: function () {
-                    window.location = "/login";
+                    window.location = "/login.aspx";
                 }
             },
             error: function (a) {
 
                 if (a.status === 401) {
-                    window.location = "/login";
+                    window.location = "/login.aspx";
                     return;
                 }
 
@@ -69,6 +73,7 @@
                 alert(a.responseText);
 
             }
+
         }).always(function(a) {
             console.log(a);
         });
@@ -88,3 +93,9 @@
 
 
 
+
+TITcs.Utils = (function() {
+
+    return {};
+
+})();
