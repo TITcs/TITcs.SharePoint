@@ -1,6 +1,6 @@
  $rootDir = $env:APPVEYOR_BUILD_FOLDER
  $buildNumber = $env:APPVEYOR_BUILD_NUMBER
- $solutionFile = "$rootDir\src\TITcs.SharePoint.Net.sln"
+ $solutionFile = "$rootDir\TITcs.SharePoint\TITcs.SharePoint.Net.sln"
  $srcDir = "$rootDir\TITcs.SharePoint\nuget\TITcs.SharePoint"
  $slns = ls "$rootDir\TITcs.SharePoint\*.sln"
  $packagesDir = "$rootDir\TITcs.SharePoint\packages"
