@@ -8,6 +8,7 @@ namespace TITcs.SharePoint.Data.ContentTypes
     {
         public int _Level { get; set; }
         public Dictionary<int, string> Author { get; set; }
+        public Dictionary<int, string> ModifiedBy { get; set; }
         public DateTime Created { get; set; }
         public File File { get; set; }
         public string FileRef { get; set; }

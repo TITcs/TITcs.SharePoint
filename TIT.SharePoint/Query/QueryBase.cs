@@ -85,7 +85,7 @@ namespace TITcs.SharePoint.Query
                         var data = new Dictionary<int, string>();
                         data.Add(fieldLookupValue.LookupId, fieldLookupValue.LookupValue);
                         return data;
-                    case "Microsoft.SharePoint.Publishing.Fields.ImageFieldValue":
+                    case "Microsoft.SharePoint.Publishing.ToArray.ImageFieldValue":
                         var fieldImageServer = value as ImageFieldValue;
                         return new PublishedImage()
                         {
@@ -208,6 +208,20 @@ namespace TITcs.SharePoint.Query
             return string.Join("", retrievals.Select(i => "<FieldRef Name=\"" + ((PropertyInfo)((MemberExpression)i.Body).Member).Name + "\" />").ToArray());
         }
 
+        protected string[] ToArray<T>(Expression<Func<T, object>>[] expressions)
+        {
+            return expressions.Select(MemberName).ToArray();
+        }
+
+        protected string MemberName<TModel>(Expression<Func<TModel, object>> expression)
+        {
+            var exp = (expression.Body is MemberExpression)
+                ? ((MemberExpression)expression.Body)
+                : ((UnaryExpression)expression.Body).Operand as MemberExpression;
+
+            return exp.Member.Name;
+        }
+
         public void Dispose()
         {
             Dispose(true);
@@ -234,8 +248,6 @@ namespace TITcs.SharePoint.Query
 
         public IList<ListQuery> LoadedList { get; set; }
 
-        public abstract Func<IEnumerable<TModel>> Load<TModel>(string listName, int limit, string camlQuery, params string[] fields);
-
         public abstract Dictionary<string, string[]> LoadFieldValues(params string[] fieldNames);
 
         public abstract void Execute();
@@ -249,14 +261,18 @@ namespace TITcs.SharePoint.Query
         {
             return new LinqToCaml.CamlQueryable<TModel>();
         }
+
+        #region Load
         public abstract Func<IEnumerable<TModel>> Load<TModel>(string listName, System.Linq.IQueryable<TModel> queryable);
         public abstract Func<IEnumerable<TModel>> Load<TModel>(string listName, System.Linq.IQueryable<TModel> queryable, Expression<Func<TModel, object>> orderBy, bool orderByAscending = true);
         public abstract Func<IEnumerable<TModel>> Load<TModel>(string listName, int limit, System.Linq.IQueryable<TModel> queryable);
         public abstract Func<IEnumerable<TModel>> Load<TModel>(string listName, int limit, System.Linq.IQueryable<TModel> queryable, Expression<Func<TModel, object>> orderBy, bool orderByAscending = true);
+        public abstract Func<IEnumerable<TModel>> Load<TModel>(string listTitle, IQueryable<TModel> queryable, Expression<Func<TModel, object>> orderBy);
+        public abstract Func<IEnumerable<TModel>> Load<TModel>(string listName, int limit, string camlQuery, params Expression<Func<TModel, object>>[] fields);
+        #endregion Load
 
         public abstract int InsertItemByContentType<TContentType>(string listName, Fields<TContentType> fields);
         public abstract int InsertItem<TContentType>(string listName, Fields<TContentType> item);
-
         public abstract void DeleteItem(string listName, int id);
         public abstract void UpdateItem<TContentType>(string listName, Fields<TContentType> item);
         public abstract UserGroup[] GetGroups();
@@ -280,7 +296,7 @@ namespace TITcs.SharePoint.Query
             int maxLength = 4000000);
 
         public abstract ContextWraper GetContextWraper();
-        //public abstract ItemUploaded UploadImage(string listName, string fileName, Stream stream);
+
         public abstract ItemUploaded UploadImage<TContentType>(string listName, string fileName, Stream stream, Fields<TContentType> fields = null, int maxLength = 4000000);
 
         protected double ConvertBytesToMegabytes(long bytes)
@@ -295,7 +311,5 @@ namespace TITcs.SharePoint.Query
         /// <param name="listTitle">Título da lista</param>
         /// <returns></returns>
         public abstract int CountItems(string listTitle);
-
-        public abstract Func<IEnumerable<TModel>> Load<TModel>(string listTitle, IQueryable<TModel> queryable, Expression<Func<TModel, object>> orderBy);
     }
 }

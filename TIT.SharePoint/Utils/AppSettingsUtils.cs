@@ -41,13 +41,12 @@ namespace TITcs.SharePoint.Utils
             }
         }
 
-        
-
         public static string Read(string key)
         {
             return ReadAppSettings(key);
         }
 
+        
         private static string ReadAppSettings(string key)
         {
             object appSetting = System.Configuration.ConfigurationManager.AppSettings[key];

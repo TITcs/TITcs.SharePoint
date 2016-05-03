@@ -75,6 +75,14 @@
       <HintPath>..\packages\TITcs.SharePoint.Libs.1.0.0\lib\Microsoft.Office.Server.UserProfiles.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\TITcs.SharePoint.Libs.1.0.0\lib\Microsoft.SharePoint.dll</HintPath>
       <Private>True</Private>
@@ -370,6 +378,8 @@
     <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="Repository\RepositorySite.cs" />
     <Compile Include="Repository\RepositoryWeb.cs" />
+    <Compile Include="Repository\SqlServerConnection.cs" />
+    <Compile Include="Repository\SqlServerRepository.cs" />
     <Compile Include="Services\FilterType.cs" />
     <Compile Include="Services\HandlerFactory.cs" />
     <Compile Include="Services\ModelObject.cs" />
@@ -398,6 +408,7 @@
     <Compile Include="UI\WebParts\TextBoxEditorPart,.cs" />
     <Compile Include="UI\WebParts\UIWebPartGroup.cs" />
     <Compile Include="Utils\AppSettingsUtils.cs" />
+    <Compile Include="Utils\ConnectionStringUtils.cs" />
     <Compile Include="Utils\EventReceiverUtils.cs" />
     <Compile Include="Utils\FeatureUtils.cs" />
     <Compile Include="Utils\ContentUtils.cs" />

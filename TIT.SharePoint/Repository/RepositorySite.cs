@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TITcs.SharePoint.Query;
+﻿using TITcs.SharePoint.Query;
 
 namespace TITcs.SharePoint.Repository
 {

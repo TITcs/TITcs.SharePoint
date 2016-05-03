@@ -37,10 +37,6 @@ namespace TITcs.SharePoint.Query
             return exp.Member.Name;
         }
 
-        public override Func<IEnumerable<TModel>> Load<TModel>(string listName, int limit, string camlQuery, params string[] fields)
-        {
-            throw new NotImplementedException();
-        }
 
         public override Dictionary<string,string[]> LoadFieldValues(params string[] fieldName)
         {
@@ -241,27 +237,51 @@ namespace TITcs.SharePoint.Query
             return null;
         }
 
-        public override Func<IEnumerable<TModel>> Load<TModel>(string listName, IQueryable<TModel> queryable)
+        public override Func<IEnumerable<TModel>> Load<TModel>(string listTitle, int limit, string camlQuery, params Expression<Func<TModel, object>>[] fields)
         {
-            return Load(listName, 0, queryable, null);
+            Guid tempKey = Guid.NewGuid();
+            var iCommand = new QueryCommand();
+
+            if (limit == 0)
+                limit = 100;
+
+            iCommand.Limit = limit;
+            iCommand.ListName = listTitle;
+            iCommand.Model = typeof(TModel);
+            iCommand.Result = typeof(List<TModel>);
+
+            iCommand.CamlQuery = camlQuery;
+            iCommand.Retrievals = ToArray(fields);
+            _loadCommand.Add(tempKey.ToString(), iCommand);
+            _loadData.Add(tempKey.ToString(), null);
+
+
+            Logger.Information("ServerQuery.Load<TModel>", "ListTitle: {0}, Limit: {1}, CamlQuery: {2}", listTitle, limit, camlQuery);
+
+            return () => (IList<TModel>)_loadData[tempKey.ToString()];
         }
 
-        public override Func<IEnumerable<TModel>> Load<TModel>(string listName, IQueryable<TModel> queryable, Expression<Func<TModel, object>> orderBy, bool orderByAscending = true)
+        public override Func<IEnumerable<TModel>> Load<TModel>(string listTitle, IQueryable<TModel> queryable)
         {
-            return Load(listName, 0, queryable, orderBy, orderByAscending);
+            return Load(listTitle, 0, queryable, null);
         }
 
-        public override Func<IEnumerable<TModel>> Load<TModel>(string listName, IQueryable<TModel> queryable, Expression<Func<TModel, object>> orderBy)
+        public override Func<IEnumerable<TModel>> Load<TModel>(string listTitle, IQueryable<TModel> queryable, Expression<Func<TModel, object>> orderBy, bool orderByAscending = true)
         {
-            return Load(listName, 0, queryable, orderBy);
+            return Load(listTitle, 0, queryable, orderBy, orderByAscending);
         }
 
-        public override Func<IEnumerable<TModel>> Load<TModel>(string listName, int limit, IQueryable<TModel> queryable)
+        public override Func<IEnumerable<TModel>> Load<TModel>(string listTitle, IQueryable<TModel> queryable, Expression<Func<TModel, object>> orderBy)
         {
-            return Load(listName, limit, queryable, null);
+            return Load(listTitle, 0, queryable, orderBy);
         }
 
-        public override Func<IEnumerable<TModel>> Load<TModel>(string listName, int limit, System.Linq.IQueryable<TModel> queryable, Expression<Func<TModel, object>> orderBy, bool orderByAscending = true)
+        public override Func<IEnumerable<TModel>> Load<TModel>(string listTitle, int limit, IQueryable<TModel> queryable)
+        {
+            return Load(listTitle, limit, queryable, null);
+        }
+
+        public override Func<IEnumerable<TModel>> Load<TModel>(string listTitle, int limit, IQueryable<TModel> queryable, Expression<Func<TModel, object>> orderBy, bool orderByAscending = true)
         {
             Guid tempKey = Guid.NewGuid();
             var iCommand = new QueryCommand();
@@ -271,7 +291,7 @@ namespace TITcs.SharePoint.Query
                 limit = 100;
 
             iCommand.Limit = limit;
-            iCommand.ListName = listName;
+            iCommand.ListName = listTitle;
             iCommand.Model = typeof(TModel);
             iCommand.Result = typeof(List<TModel>);
 
@@ -302,14 +322,13 @@ namespace TITcs.SharePoint.Query
             return () => (IList<TModel>)_loadData[tempKey.ToString()];
         }
 
-
-        public override int InsertItem<TContentType>(string listName, Fields<TContentType> fields)
+        public override int InsertItem<TContentType>(string listTitle, Fields<TContentType> fields)
         {
-            Logger.Information("ServerQuery.InsertItem<TContentType>", string.Format("List = {0}, Fields = {1}", listName, string.Join(",", fields.ItemDictionary.Select(i => string.Format("{0} = {1}", i.Key, i.Value)).ToArray())));
+            Logger.Information("ServerQuery.InsertItem<TContentType>", string.Format("List = {0}, ToArray = {1}", listTitle, string.Join(",", fields.ItemDictionary.Select(i => string.Format("{0} = {1}", i.Key, i.Value)).ToArray())));
 
             using (_serverContext)
             {
-                var list = _serverContext.Lists[listName];
+                var list = _serverContext.Lists[listTitle];
 
                 SPListItem newitem = list.AddItem();
 
@@ -335,11 +354,11 @@ namespace TITcs.SharePoint.Query
             }
         }
 
-        public override int InsertItemByContentType<TContentType>(string listName, Fields<TContentType> fields)
+        public override int InsertItemByContentType<TContentType>(string listTitle, Fields<TContentType> fields)
         {
             using (_serverContext)
             {
-                var list = _serverContext.Lists[listName];
+                var list = _serverContext.Lists[listTitle];
 
                 SPListItem newitem = list.AddItem();
 
@@ -363,8 +382,7 @@ namespace TITcs.SharePoint.Query
                 return newitem.ID;
             }
         }
-
-
+        
         protected override object ValidateValueType(object value)
         {
             var lookup = new Dictionary<int, string>();
@@ -573,13 +591,13 @@ namespace TITcs.SharePoint.Query
             return base.ValidateValueType(value);
         }
 
-        public override void DeleteItem(string listName, int id)
+        public override void DeleteItem(string listTitle, int id)
         {
-            Logger.Information("ServerQuery.DeleteItem", string.Format("List = {0}, ID = {1}", listName, id));
+            Logger.Information("ServerQuery.DeleteItem", string.Format("List = {0}, ID = {1}", listTitle, id));
 
             using (_serverContext)
             {
-                var list = _serverContext.Lists[listName];
+                var list = _serverContext.Lists[listTitle];
 
                 bool allowUnsafeUpdates = _serverContext.AllowUnsafeUpdates;
                 _serverContext.AllowUnsafeUpdates = true;
@@ -591,9 +609,9 @@ namespace TITcs.SharePoint.Query
             }
         }
 
-        public override void UpdateItem<TContentType>(string listName, Fields<TContentType> fields)
+        public override void UpdateItem<TContentType>(string listTitle, Fields<TContentType> fields)
         {
-            Logger.Information("ServerQuery.UpdateItem<TContentType>", string.Format("List = {0}, Fields = {1}", listName, string.Join(",", fields.ItemDictionary.Select(i => string.Format("{0} = {1}", i.Key, i.Value)).ToArray())));
+            Logger.Information("ServerQuery.UpdateItem<TContentType>", string.Format("List = {0}, ToArray = {1}", listTitle, string.Join(",", fields.ItemDictionary.Select(i => string.Format("{0} = {1}", i.Key, i.Value)).ToArray())));
 
             if (!fields.ItemDictionary.ContainsKey("ID"))
                 throw new ArgumentException("Não é possível atualizar o item sem o respectivo ID");
@@ -607,7 +625,7 @@ namespace TITcs.SharePoint.Query
 
             using (_serverContext)
             {
-                var list = _serverContext.Lists[listName];
+                var list = _serverContext.Lists[listTitle];
 
                 bool allowUnsafeUpdates = _serverContext.AllowUnsafeUpdates;
                 _serverContext.AllowUnsafeUpdates = true;
@@ -630,7 +648,7 @@ namespace TITcs.SharePoint.Query
             get { return SPContext.Current.Web.Url; }
         }
 
-        public override ItemUploaded UploadDocument<TContentType>(string listName, string fileName, Stream stream, Fields<TContentType> fields = null,
+        public override ItemUploaded UploadDocument<TContentType>(string listTitle, string fileName, Stream stream, Fields<TContentType> fields = null,
             int maxLength = 4000000)
         {
             throw new NotImplementedException();
@@ -665,13 +683,13 @@ namespace TITcs.SharePoint.Query
         /// <summary>
         /// Envia uma imagem para uma lista do tipo Biblioteca de Imagens
         /// </summary>
-        /// <param name="listName">Título da lista</param>
+        /// <param name="listTitle">Título da lista</param>
         /// <param name="fileName">Nome da imagem</param>
         /// <param name="stream">Stream da imagem</param>
         /// <param name="fields">Informações adicionais a serem armazenados na imagem</param>
         /// <param name="maxLength">Tamanho máximo permitido para a imagem</param>
         /// <returns></returns>
-        public override ItemUploaded UploadImage<TContentType>(string listName, string fileName, Stream stream, Fields<TContentType> fields = null, int maxLength = 4000000)
+        public override ItemUploaded UploadImage<TContentType>(string listTitle, string fileName, Stream stream, Fields<TContentType> fields = null, int maxLength = 4000000)
         {
             if (stream.Length > maxLength)
                 throw new Exception(string.Format("O tamanho máximo do arquivo é de {0}Mb", ConvertBytesToMegabytes(maxLength)));
@@ -683,7 +701,7 @@ namespace TITcs.SharePoint.Query
 
             fileName = fileName.Replace(" ", "-");
 
-            var list = _serverContext.Lists[listName];
+            var list = _serverContext.Lists[listTitle];
             
             var fileRef = String.Format("{0}/{1}", list.RootFolder.ServerRelativeUrl, fileName);
 

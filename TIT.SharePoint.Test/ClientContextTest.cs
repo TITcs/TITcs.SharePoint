@@ -24,7 +24,7 @@ namespace TITcs.SharePoint.Test
             {
                 var camlQuery = "";//"<Eq><FieldRef Name='ID' /><Value Type='Counter'>1</Value></Eq>";
 
-                var noticiaQuery = query.Load<Pagina>("Páginas", 1000, camlQuery, "ID", "Title");
+                var noticiaQuery = query.Load<Pagina>("Páginas", 1000, camlQuery, i => i.Title);
 
                 query.Execute();
 
