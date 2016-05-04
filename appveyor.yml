@@ -22,7 +22,7 @@ notifications:
 - provider: Email
   to:
   - stiven@outlook.com
-  subject: BoletoNet Build
+  subject: TITcs.SharePoint Build
   on_build_success: false
   on_build_failure: true
   on_build_status_changed: true
