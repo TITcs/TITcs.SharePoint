@@ -69,10 +69,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Scripts\titcs\titcs.js" />
-    <Content Include="Scripts\titcs\titcs.min.js">
+    <Content Include="Scripts\libs\titcs.js" />
+    <Content Include="Scripts\libs\titcs.min.js">
       <DependentUpon>titcs.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\libs\titcs.sharepoint.js" />
+    <Content Include="Scripts\libs\titcs.sharepoint.min.js">
+      <DependentUpon>titcs.sharepoint.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\titcs.sharepoint\titcs.sharepoint.utils.js" />
+    <Content Include="Scripts\titcs\titcs.log.js" />
     <Content Include="Scripts\titcs\titcs.utils.js" />
     <None Include="bundleconfig.json" />
     <None Include="Web.Debug.config">

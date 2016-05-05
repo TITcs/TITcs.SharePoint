@@ -1,10 +1,17 @@
 [
   {
-    "outputFileName": "Scripts/titcs/titcs.js",
+    "outputFileName": "Scripts/libs/titcs.js",
     "inputFiles": [
       "Scripts/titcs/titcs._init.js",
+      "Scripts/titcs/titcs.log.js",
       "Scripts/titcs/titcs.http.js",
       "Scripts/titcs/titcs.utils.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/libs/titcs.sharepoint.js",
+    "inputFiles": [
+      "Scripts/titcs.sharepoint/titcs.sharepoint.utils.js"
     ]
   }
 ]

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Caching;
-using System.Text;
-using System.Threading.Tasks;
 using TITcs.SharePoint.Utils;
 
-namespace TITcs.SharePoint.Repository
+namespace TITcs.SharePoint.Core
 {
     public class Cache
     {
@@ -81,9 +79,9 @@ namespace TITcs.SharePoint.Repository
 
         }
 
-        public static void InvalidateCache(string cacheKey, string cacheSubKey, params object[] args)
+        public static void InvalidateCache(Type cacheKey, string cacheSubKey, params object[] args)
         {
-            string key = cacheKey;
+            string key = cacheKey.ToString();
 
             if (cacheSubKey == null)
                 Cache.Remove(key);

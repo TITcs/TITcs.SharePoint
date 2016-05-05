@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.SessionState;
 using Newtonsoft.Json;
 using TITcs.SharePoint.Log;
+using TITcs.SharePoint.Core;
 
 namespace TITcs.SharePoint.Services
 {
-    public abstract class ServiceBase : IHttpHandler, IRequiresSessionState
+    public abstract class ServiceBase : CacheService, IHttpHandler, IRequiresSessionState
     {
         private bool _isPost = false;
         private HttpContext _httpContext;
@@ -156,12 +157,12 @@ namespace TITcs.SharePoint.Services
 
         protected object BusinessRule(int rule, string description, object data)
         {
-            _httpContext.Response.StatusCode = 500;
+            _httpContext.Response.StatusCode = 400;
             _httpContext.Response.TrySkipIisCustomErrors = true;
 
             return new
             {
-                status = 500,
+                status = 400,
                 rule = new
                 {
                     number = rule,

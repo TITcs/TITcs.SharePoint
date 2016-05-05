@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using TITcs.SharePoint.Core;
 using TITcs.SharePoint.Data.ContentTypes;
 using TITcs.SharePoint.Log;
 using TITcs.SharePoint.Query;
 
 namespace TITcs.SharePoint.Repository
 {
-    public abstract class RepositoryBase : IDisposable
+    public abstract class RepositoryBase : CacheService, IDisposable
     {
         private int _limit = 50;
 
@@ -73,14 +74,14 @@ namespace TITcs.SharePoint.Repository
             return Cache.Get<T>(key, subKey);
         }
 
-        protected void InvalidateCache(string cacheKey)
+        protected void InvalidateCache(Type cacheKey)
         {
             InvalidateCache(cacheKey, null);
         }
 
-        protected void InvalidateCache(string cacheKey, string cacheSubKey, params object[] args)
+        protected void InvalidateCache(Type cacheKey, string cacheSubKey, params object[] args)
         {
-            string key = cacheKey;
+            string key = cacheKey.ToString();
 
             if (cacheSubKey == null)
                 Cache.Remove(key);

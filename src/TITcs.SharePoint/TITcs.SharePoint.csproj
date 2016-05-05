@@ -129,6 +129,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\CacheService.cs" />
     <Compile Include="Data\ContentTypes\Item.cs" />
     <Compile Include="Extensions\ConvertExtensions.cs" />
     <Compile Include="Log\ILog.cs" />
@@ -364,7 +365,7 @@
     <Compile Include="Query\User.cs" />
     <Compile Include="Query\UserGroup.cs" />
     <Compile Include="Query\UserProfile.cs" />
-    <Compile Include="Repository\Cache.cs" />
+    <Compile Include="Core\Cache.cs" />
     <Compile Include="Repository\IListQuery.cs" />
     <Compile Include="Repository\Lists.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />

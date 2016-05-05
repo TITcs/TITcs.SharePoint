@@ -1,90 +1,121 @@
-﻿TITcs.Http = (function () {
+﻿(function(TITcs) {
 
-    var get = function (url, data, cache) {
+    var http = (function() {
 
-        return http({
-            url: url,
-            data: data,
-            type: 'GET',
-            cache: cache
-        });
+        var get = function(url, data, cache) {
 
-    },
-    post = function (url, data) {
+            TITcs.Log.debug("TITcs.Http.get", { url: url, data: data, cache: cache });
 
-        return http({
-            url: url,
-            data: data,
-            type: 'POST'
-        });
+            return http({
+                url: url,
+                data: data,
+                type: 'GET',
+                cache: cache
+            });
 
-    },
-    put = function (url, data) {
+        };
 
-        return http({
-            url: url,
-            data: data,
-            type: 'PUT'
-        });
+        var post = function (url, data) {
 
-    },
-    del = function (url, data) {
+            TITcs.Log.debug("TITcs.Http.get", { url: url, data: data });
 
-        return http({
-            url: url,
-            data: data,
-            type: 'DELETE'
-        });
+            return http({
+                url: url,
+                data: data,
+                type: 'POST'
+            });
 
-    };
+        };
 
-    function http(options) {
+        var put = function(url, data) {
 
-        if (options.cache === undefined) {
-            options.cache = false;
-        }
+            TITcs.Log.debug("TITcs.Http.put", { url: url, data: data });
 
-        console.log("Url: " + options.url);
+            return http({
+                url: url,
+                data: data,
+                type: 'PUT'
+            });
 
-        return $.ajax({
-            url: options.url,
-            type: options.type,
-            data: options.data,
-            dataType:'json',
-            cache: options.cache,
-            statusCode: {
-                401: function () {
-                    window.location = "/login.aspx";
-                }
-            },
-            error: function (a) {
+        };
 
-                if (a.status === 401) {
-                    window.location = "/login.aspx";
-                    return;
-                }
+        var del = function(url, data) {
 
-                //var response = $.parseJSON(a.responseText);
+            TITcs.Log.debug("TITcs.Http.del", { url: url, data: data });
 
-                alert(a.responseText);
+            return http({
+                url: url,
+                data: data,
+                type: 'DELETE'
+            });
 
+        };
+
+        var http = function (options) {
+
+            if (options.cache === undefined) {
+                options.cache = false;
             }
 
-        }).always(function(a) {
-            console.log(a);
-        });
+            TITcs.Log.debug("TITcs.Http.http", options.url);
 
-    };
+            var defer = $.Deferred();
 
-    return {
-        get: get,
-        post: post,
-        put: put,
-        del: del
-    };
+            $.ajax({
+                url: options.url,
+                type: options.type,
+                data: options.data,
+                dataType: 'json',
+                cache: options.cache
 
-})();
+            }).then(function(data) {
 
+                TITcs.Log.debug("TITcs.Http.done", data);
+
+                defer.resolve(data);
+
+            }, function(jqXHR) {
+
+                var response = jqXHR.responseJSON;
+
+                var result = {
+                    success: false
+                };
+
+                if (response.exception) {
+                    result.exception = response.exception;
+                }
+
+                if (response.rule) {
+                    result.rule = response.rule;
+                }
+
+                if (response.data) {
+                    result.data = response.data;
+                }
+
+                TITcs.Log.debug("TITcs.Http.fail", result);
+
+                defer.resolve(result);
+
+            });
+
+            return defer;
+
+        };
+
+        return {
+            get: get,
+            post: post,
+            put: put,
+            del: del
+        };
+
+    })();
+
+    TITcs.Http = http;
+
+})(TITcs || (TITcs = {}));
 
 
 
