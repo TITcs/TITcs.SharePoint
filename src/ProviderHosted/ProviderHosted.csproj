@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\libs\titcs.js" />
     <Content Include="Scripts\libs\titcs.min.js">
       <DependentUpon>titcs.js</DependentUpon>

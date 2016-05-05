@@ -17,7 +17,7 @@
         };
 
         return {
-            isIE: isIE
+            isIE: isIE()
         };
 
     })();

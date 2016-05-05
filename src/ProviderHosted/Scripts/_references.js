@@ -1,4 +1,5 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="app.js" />
 /// <reference path="libs/jquery-1.11.1.min.js" />
 /// <reference path="libs/titcs.js" />
 /// <reference path="libs/titcs.sharepoint.js" />
