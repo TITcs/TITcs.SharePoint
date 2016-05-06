@@ -5,7 +5,6 @@
         protected SqlServerRepository(string connectionString)
             : base(connectionString)
         {
-
         }
     }
 }
