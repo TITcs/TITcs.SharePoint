@@ -81,6 +81,7 @@
     <Content Include="Scripts\titcs.sharepoint\titcs.sharepoint.utils.js" />
     <Content Include="Scripts\titcs\titcs.log.js" />
     <Content Include="Scripts\titcs\titcs.utils.js" />
+    <Content Include="Web.config" />
     <None Include="bundleconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -95,7 +96,6 @@
     <Content Include="Scripts\titcs\titcs.http.js" />
     <Content Include="Scripts\titcs\titcs._init.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
