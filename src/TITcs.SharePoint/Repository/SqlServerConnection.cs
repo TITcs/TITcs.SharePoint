@@ -10,7 +10,7 @@ namespace TITcs.SharePoint.Repository
         private SqlConnection _sqlConnection;
         private static string _connectionString;
 
-        protected SqlServerConnection(String connectionString)
+        protected SqlServerConnection(string connectionString)
         {
             if (_connectionString == null)
                 _connectionString = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
