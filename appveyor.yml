@@ -1,10 +1,6 @@
-version: 1.0.0.{build}
+version: 1.0.{build}
 
 configuration: Release
-
-#environment:
-#  nuget_api_key:
-#    secure: gPpssATrDRZaa6fHJn0irm9K1T4LWPuvlDrD23bN1Mbu9VA6TIogGJfoFDN/pxOD
 
 after_build:
   - ps: >-
