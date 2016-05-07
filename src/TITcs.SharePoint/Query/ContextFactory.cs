@@ -1,9 +1,9 @@
 ﻿using System.Web;
-using System.Web.Configuration;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Client;
 using System;
 using System.Net;
+using Microsoft.Win32;
 using TITcs.SharePoint.Log;
 using TITcs.SharePoint.Utils;
 
