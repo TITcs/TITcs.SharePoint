@@ -12,13 +12,11 @@
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <description>TITcs.SharePoint is a library that aims to help developers beginning in the SharePoint development.</description>
         <tags>titcs sharepoint development client context server</tags>
+        <dependencies>
+            <dependency id="Newtonsoft.Json" version="6.0.5" />
+        </dependencies>
     </metadata>
     <files>
         <file src="..\..\TITcs.SharePoint\bin\Release\TITcs.SharePoint.dll" target="lib\net45\TITcs.SharePoint.dll" />
     </files>
-    <dependencies>
-        <group targetFramework="net45">
-            <dependency id="Newtonsoft.Json" version="6.0.5" />
-        </group>
-    </dependencies>
 </package>
