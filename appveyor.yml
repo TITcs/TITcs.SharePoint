@@ -10,14 +10,14 @@ artifacts:
     name: src
     
 environment:
-  my_variable:
+  nuget_apy_key:
     secure: gPpssATrDRZaa6fHJn0irm9K1T4LWPuvlDrD23bN1Mbu9VA6TIogGJfoFDN/pxOD
 
 deploy:
 - provider: NuGet
-  server: 
+  server: https://www.nuget.org
   api_key:
-    secure: gPpssATrDRZaa6fHJn0irm9K1T4LWPuvlDrD23bN1Mbu9VA6TIogGJfoFDN/pxOD
+    secure: nuget_apy_key
   skip_symbols: false
   artifact: /.*\.nupkg/
   on:
