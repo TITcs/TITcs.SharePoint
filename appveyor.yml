@@ -2,9 +2,9 @@ version: 1.0.0.{build}
 
 configuration: Release
 
-environment:
-  nuget_api_key:
-    secure: '#gPpssATrDRZaa6fHJn0irm9K1T4LWPuvlDrD23bN1Mbu9VA6TIogGJfoFDN/pxOD'
+#environment:
+#  nuget_api_key:
+#    secure: gPpssATrDRZaa6fHJn0irm9K1T4LWPuvlDrD23bN1Mbu9VA6TIogGJfoFDN/pxOD
 
 after_build:
   - ps: >-
@@ -20,7 +20,7 @@ deploy:
 - provider: NuGet
   server: https://www.nuget.org
   api_key:
-    secure: '#002c8896-a070-47fc-92c1-f900c155d407'
+    secure: gPpssATrDRZaa6fHJn0irm9K1T4LWPuvlDrD23bN1Mbu9VA6TIogGJfoFDN/pxOD
   skip_symbols: false
   artifact: /.*\.nupkg/
   on:
