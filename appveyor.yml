@@ -8,13 +8,18 @@ after_build:
 artifacts:
   - path: src\nuget\titcs.sharepoint
     name: src
+    
+environment:
+  my_variable:
+    secure: gPpssATrDRZaa6fHJn0irm9K1T4LWPuvlDrD23bN1Mbu9VA6TIogGJfoFDN/pxOD
 
 deploy:
 - provider: NuGet
-  server: https://www.myget.org/F/titcs/
+  server: 
   api_key:
-    secure: 07c9ebf0-9b2e-4a04-b8ca-098850db17af
-  skip_symbols: true
+    secure: gPpssATrDRZaa6fHJn0irm9K1T4LWPuvlDrD23bN1Mbu9VA6TIogGJfoFDN/pxOD
+  skip_symbols: false
+  artifact: /.*\.nupkg/
   on:
     branch: master
     
