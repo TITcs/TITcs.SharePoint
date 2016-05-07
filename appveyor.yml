@@ -20,7 +20,7 @@ deploy:
 - provider: NuGet
   server: https://www.nuget.org
   api_key:
-    secure: nuget_api_key.secure
+    secure: '#002c8896-a070-47fc-92c1-f900c155d407'
   skip_symbols: false
   artifact: /.*\.nupkg/
   on:
