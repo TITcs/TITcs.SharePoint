@@ -14,7 +14,7 @@
         <tags>titcs sharepoint development client context server</tags>
     </metadata>
     <files>
-        <file src="..\..\TITcs.SharePoint\bin\Release\TITcs.SharePoint.dll" target="lib\TITcs.SharePoint.dll" />
+        <file src="..\..\TITcs.SharePoint\bin\Release\TITcs.SharePoint.dll" target="lib\net45\TITcs.SharePoint.dll" />
     </files>
     <dependencies>
         <group targetFramework="net45">
