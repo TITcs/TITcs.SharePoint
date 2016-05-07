@@ -17,6 +17,8 @@
         <file src="..\..\TITcs.SharePoint\bin\Release\TITcs.SharePoint.dll" target="lib\TITcs.SharePoint.dll" />
     </files>
     <dependencies>
+        <group>
             <dependency id="Newtonsoft.Json" version="6.0.5" />
+        </group>
     </dependencies>
 </package>
