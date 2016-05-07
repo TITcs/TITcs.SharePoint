@@ -17,11 +17,13 @@ deploy:
 - provider: NuGet
   server: https://www.nuget.org
   api_key:
-    secure: nuget_apy_key
+    secure: nuget_apy_key.secure
   skip_symbols: false
   artifact: /.*\.nupkg/
   on:
     branch: master
+    
+test: off
     
 notifications:
 - provider: Email
