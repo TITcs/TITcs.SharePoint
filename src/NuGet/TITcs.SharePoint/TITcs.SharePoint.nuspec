@@ -8,7 +8,7 @@
         <owners>TITcs</owners>
         <licenseUrl>https://github.com/TITcs/TITcs.SharePoint/blob/master/LICENCE</licenseUrl>
         <projectUrl>https://github.com/TITcs/TITcs.SharePoint/</projectUrl>
-        <iconUrl></iconUrl>
+        <iconUrl>https://github.com/TITcs/TITcs.SharePoint/src/nuget/TITcs.SharePoint/icon.png</iconUrl>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <description>TITcs.SharePoint is a library that aims to help developers beginning in the SharePoint development.</description>
         <tags>titcs sharepoint development client context server</tags>
